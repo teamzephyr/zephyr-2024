@@ -1,5 +1,5 @@
 ﻿# artifacts/playbook
-##  Follow below instructions to deploy application
+## ESG Benchmark automation deploy instructions
 ## All instructions to be done in GCP shell
 
 git clone -b zucr  https://github.com/Hackathon2024-March/zephyr.git
@@ -13,7 +13,11 @@ https://web.postman.co/
 type below rest endpoints for validation
 
 https://TARGETURLesg/benchmark/keepalive  ( GET )
+
 https://TARGETURL/esg/benchmark/pdf-report/{entityName}  ( POST )
+
 https://TARGETURLesg/benchmark/upload/{entityName}  ( POST)
+
 https://TARGETURL/esg/benchmark/upload/{entityName}/{esgType}/{esgIndicator}  ( POST )
+
 https://TARGETURL/esg/benchmark/pdf-report/{entityName}  ( POST )

@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from main import app
 from markupsafe import escape
 from flask import Flask, jsonify, request, abort
@@ -22,9 +23,16 @@ def esgEntityName(entityName):
     
     myRequestObj = request_esg.UploadRequest(file, entityName)
     
-    # do logic with file in request
+    responseUpload = response_esg.UploadRequest()
 
-    return jsonify({'response': 'did not fail'}), 200
+    # do logic with file in request and fill response
+    
+    
+    # Response should use class:
+    #   response_esg.UploadRequest 
+
+
+    return jsonify(asdict(responseUpload)), 200
 
 
 #    summary: Fetch specific ESG indicator for given entity
@@ -38,15 +46,28 @@ def esgUpload(entityName, esgType, esgIndicator):
 
     myRequestObj = request_esg.UploadRequestType(file, entityName, esgType, esgIndicator)
 
-    # do logic with file in request
+    responseUploadType = response_esg.UploadRequestType()
 
-    return jsonify({'response': 'did not fail'}), 200
+    # do logic with file in request and fill response
+
+    # Response should use class:  
+    #   response_esg.UploadRequestType
+    return jsonify(asdict(responseUploadType)), 200
 
 
 #   summary: Find status of the benchakring service
 @app.route('/api/esg/benchmark/keepalive', methods=['GET'])
 def keepAlive():
-    return "Hello keepalive"
+
+    responseKeepAlive = response_esg.KeepAliveRepsonse()
+
+    # do logic with file in request and fill response
+
+    # Response should use class: 
+    #   response_esg.keepAliveRepsonse
+
+
+    return jsonify(asdict(responseKeepAlive)), 200
 
 
 #   summary: get PDF URL for given entity name
@@ -60,10 +81,15 @@ def pdfReport(entityName):
     
     myRequestObj = request_esg.PDFReportRequest(file, entityName)
 
-    # do logic with file in request
+    response = response_esg.PDFReportRepsonse()
 
-    
-    return f"<p>Hello{entityName}</p>"
+    response.pdfUrlPath = ""
+
+    # do logic with file in request and fill response
+
+    # Response should use class: 
+    #   response_esg.pdfReportRepsonse    
+    return jsonify(asdict(response)), 200
 
 
 is_pdf = lambda filename: '.' in filename and filename.rsplit('.', 1)[1].lower() in 'pdf'

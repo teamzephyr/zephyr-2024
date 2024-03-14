@@ -1,14 +1,14 @@
 
-from flask import Flask, request, abort
+from contextlib import nullcontext
 
 
 class UploadRequest:
     entityName = ''
-    documentUpload = ''
+    documentUpload = nullcontext
     
-    def __init__(self, json, param):
+    def __init__(self, file, param):
         self.entityName = param
-        self.documentUpload= json['documentUpload']
+        self.documentUpload= file
     
 
 class UploadRequestType:
@@ -16,19 +16,19 @@ class UploadRequestType:
     esgType = ''
     esgIndicator = ''
 
-    documentUpload = ''
+    documentUpload = nullcontext
     
-    def __init__(self, json, entityName, esgType, esgIndicator):
+    def __init__(self, file, entityName, esgType, esgIndicator):
         self.entityName = entityName
         self.entityName = esgType
         self.entityName = esgIndicator
 
-        self.documentUpload= json['documentUpload']
+        self.documentUpload= file
 
 class PDFReportRequest:
     entityName = ''
-    documentUpload = ''
+    documentUpload = nullcontext
     
-    def __init__(self, json, entityName):
+    def __init__(self, file, entityName):
         self.entityName = entityName
-        self.documentUpload= json['documentUpload']
+        self.documentUpload= file

@@ -1,39 +1,108 @@
 from main import app
 from markupsafe import escape
-from flask import Flask, request, abort
+from flask import Flask, jsonify, request, abort
 
 import request_esg
+import response_esg
 
-# not important
+# good for testing the endpoint is alive
 @app.route('/')
 def index():
-    return "Home page"
+    return escape("hello this is the home index")
+
 
 #      summary: Upload ESG for given entity and retrieve all ESG benchmark document
-@app.route('/esg/benchmark/upload/<entityName>', methods=['POST'])
+@app.route('/api/esg/benchmark/upload/<entityName>', methods=['POST'])
 def esgEntityName(entityName):
-    myRequestObj = request_esg.UploadRequest(request.json, entityName)
-    print("*********")
-    print(myRequestObj.entityName)
-    print(myRequestObj.documentUpload)
-    print("*********")
 
-    return f"<p>Hello{entityName}</p>"
+    file = upload_file(request, entityName)
+    
+    if isError(file):
+        return jsonify(file), 400
+    
+    myRequestObj = request_esg.UploadRequest(file, entityName)
+    
+    # do logic with file in request
+
+    return jsonify({'response': 'did not fail'}), 200
+
 
 #    summary: Fetch specific ESG indicator for given entity
-@app.route('/esg/benchmark/upload/<entityName>/<esgType>/<esgIndicator>', methods=['POST'])
+@app.route('/api/esg/benchmark/upload/<entityName>/<esgType>/<esgIndicator>', methods=['POST'])
 def esgUpload(entityName, esgType, esgIndicator):
-    myRequestObj = request_esg.UploadRequestType(request.json, entityName, esgType, esgIndicator)
 
-    return f"<p>Hello /esg/benchmark/upload/{entityName}/{esgType}/{esgIndicator}</p>"
+    file = upload_file(request, entityName)
+
+    if isError(file):
+        return jsonify(file), 400
+
+    myRequestObj = request_esg.UploadRequestType(file, entityName, esgType, esgIndicator)
+
+    # do logic with file in request
+
+    return jsonify({'response': 'did not fail'}), 200
+
 
 #   summary: Find status of the benchakring service
-@app.route('/esg/benchmark/keepalive', methods=['GET'])
+@app.route('/api/esg/benchmark/keepalive', methods=['GET'])
 def keepAlive():
-    return "<p>Hello keepalive</p>"
+    return "Hello keepalive"
+
 
 #   summary: get PDF URL for given entity name
 @app.route('/esg/benchmark/pdf-report/<entityName>', methods=['POST'])
 def pdfReport(entityName):
-    myRequestObj = request_esg.PDFReportRequest(request.json, entityName)
+
+    file = upload_file(request, entityName)
+
+    if isError(file):
+        return jsonify(file), 400
+    
+    myRequestObj = request_esg.PDFReportRequest(file, entityName)
+
+    # do logic with file in request
+
+    
     return f"<p>Hello{entityName}</p>"
+
+
+is_pdf = lambda filename: '.' in filename and filename.rsplit('.', 1)[1].lower() in 'pdf'
+
+
+# these are utils that help the endpoints work
+def upload_file(request, entityName):
+    
+    if 'documentUpload' not in request.files:
+        return {'error': 'No file in request'}
+
+    file = request.files['documentUpload']
+
+    if not is_pdf(file.filename):
+        return {'error': 'file uploaded is not a PDF'}
+
+    if file.filename == '':
+        return {'error': 'No selected file'}
+    
+
+    file_path = "code/uploads/"
+    fullpath = f'{file_path}{entityName}.pdf'
+    easyPrint(fullpath)
+    file.save(fullpath)
+
+    return file
+
+
+def isError(file):
+    try:
+        if 'error' in file:
+            return True
+        else:
+            return False
+    except Exception:
+        easyPrint("")
+        return False
+    
+def easyPrint(s):
+    print("\n*****************")
+    print(s)
+    print("*****************\n")

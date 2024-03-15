@@ -10,7 +10,7 @@ gcloud app deploy
 
 ######  It takes few mins to deploy to cloud, target url will be given on the screen
 
-Go to Online Postman  to test  rest endpoints
+######Go to Online Postman  to test rest endpoints, please replace TARGETURL with cloud app url given in above step
 
 https://web.postman.co/
 type below rest endpoints for validation

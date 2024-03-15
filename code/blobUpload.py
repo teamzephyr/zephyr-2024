@@ -18,6 +18,8 @@ def upload_blob(file):
 
     blob = bucket.blob(destination_blob_name)
 
+    file.seek(0)
+    
     blob.upload_from_file(file)
 
     print(f'file: {file.filename} uploaded to destination {destination_blob_name}')

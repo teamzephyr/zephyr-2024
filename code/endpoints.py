@@ -122,7 +122,7 @@ def upload_file(request, entityName):
     file_path = "code/uploads/"
     fullpath = f'{file_path}{entityName}.pdf'
     easyPrint(fullpath)
-    file.save(fullpath)
+    # file.save(fullpath)
 
     return file
 

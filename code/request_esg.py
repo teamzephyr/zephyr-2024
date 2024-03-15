@@ -1,10 +1,7 @@
 
-from contextlib import nullcontext
-
-
 class UploadRequest:
     entityName = ''
-    documentUpload = nullcontext
+    documentUpload = None
     
     def __init__(self, file, param):
         self.entityName = param
@@ -16,7 +13,7 @@ class UploadRequestType:
     esgType = ''
     esgIndicator = ''
 
-    documentUpload = nullcontext
+    documentUpload = None
     
     def __init__(self, file, entityName, esgType, esgIndicator):
         self.entityName = entityName
@@ -27,7 +24,7 @@ class UploadRequestType:
 
 class PDFReportRequest:
     entityName = ''
-    documentUpload = nullcontext
+    documentUpload = None
     
     def __init__(self, file, entityName):
         self.entityName = entityName

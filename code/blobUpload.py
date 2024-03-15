@@ -7,7 +7,7 @@ def upload_blob(file):
     """
 
     # define the name and location/fileName to sort the pdf
-    bucket_name = 'gs:llpdfsusdata'
+    bucket_name = 'gs://pdfsusdata'
     destination_blob_name = f'{file.filename}'
 
     print(f'file: {file.filename} to be uploaded to destination {destination_blob_name}')

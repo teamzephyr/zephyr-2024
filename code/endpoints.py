@@ -69,8 +69,10 @@ def esgUpload(entityName, esgType, esgIndicator):
 def keepAlive():
 
     responseKeepAlive = response_esg.KeepAliveRepsonse()
+    responseKeepAlive.status = 'UP'
+    responseKeepAlive.message = 'the service is up'
 
-    # do logic 
+    # why does this end point exist???
 
 
     # Response should use class: 
@@ -90,6 +92,8 @@ def pdfReport(entityName):
     myRequestObj = request_esg.PDFReportRequest(file, entityName)
     response = response_esg.PDFReportRepsonse()
     response.pdfUrlPath = ""
+
+    response.pdfUrlPath = blobUpload.findPath(entityName)
     
     # do logic with file in request and fill response
     #TODO

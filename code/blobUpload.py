@@ -7,7 +7,6 @@ def upload_blob(file):
     """
 
     # define the name and location/fileName to sort the pdf
-    # bucket_name = 'gs://pdfsusdata'
     bucket_name = 'pdfsusdata'
 
     destination_blob_name = f'{file.filename}'
@@ -26,4 +25,7 @@ def upload_blob(file):
 
     print(f'file: {file.filename} uploaded to destination {destination_blob_name}')
 
- 
+
+def findPath(entityName) -> str:
+    bucket_name = 'pdfsusdata'
+    return f'https://storage.googleapis.com/{bucket_name}/{entityName}'

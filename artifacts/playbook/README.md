@@ -2,7 +2,10 @@
 ## ESG Benchmark automation deploy instructions
 ## All instructions to be done in GCP shell
 
+export PROJECT_ID=$(gcloud config get-value project)
 git clone -b zucr  https://github.com/Hackathon2024-March/zephyr.git
+
+cd zephyr/code
 
 gcloud app create --region=$AE_REGION
 

@@ -7,7 +7,9 @@ def upload_blob(file):
     """
 
     # define the name and location/fileName to sort the pdf
-    bucket_name = 'gs://pdfsusdata'
+    # bucket_name = 'gs://pdfsusdata'
+    bucket_name = 'pdfsusdata'
+
     destination_blob_name = f'{file.filename}'
 
     print(f'file: {file.filename} to be uploaded to destination {destination_blob_name}')
@@ -19,7 +21,7 @@ def upload_blob(file):
     blob = bucket.blob(destination_blob_name)
 
     file.seek(0)
-    
+
     blob.upload_from_file(file)
 
     print(f'file: {file.filename} uploaded to destination {destination_blob_name}')

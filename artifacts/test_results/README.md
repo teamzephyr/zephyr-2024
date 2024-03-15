@@ -13,6 +13,10 @@ POST
 /esg/benchmark/upload/{entityName}/{esgType}/{esgIndicator}
 Fetch specific ESG indicator for given entity
 
+https://wells-fargo-genai24-8370.uc.r.appspot.com/api/esg/benchmark/upload/ESG/ESGScore/MSCISustainalytics
+
+
+
 GET
 /esg/benchmark/keepalive
 Find status of the benchakring service

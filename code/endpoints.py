@@ -27,10 +27,12 @@ def esgEntityName(entityName):
     myRequestObj = request_esg.UploadRequest(file, entityName)
     
     responseUpload = response_esg.UploadRequest()
-
-    # do logic with file in request and fill response
-    
     responseUpload = mapper.mapUploadRequest(None, entityName)
+
+    blobUpload.upload_blob(file)
+
+    #get response logic
+    #TODO
 
     
     # Response should use class:
@@ -50,11 +52,12 @@ def esgUpload(entityName, esgType, esgIndicator):
     myRequestObj = request_esg.UploadRequestType(file, entityName, esgType, esgIndicator)
 
     responseUploadType = response_esg.UploadRequestType()
-
-    # do logic with file in request and fill response
-
     responseUploadType = mapper.mapUploadRequestType(None, entityName)
 
+    blobUpload.upload_blob(file)
+
+    #get response logic
+    #TODO
 
     # Response should use class:  
     #   response_esg.UploadRequestType
@@ -67,12 +70,11 @@ def keepAlive():
 
     responseKeepAlive = response_esg.KeepAliveRepsonse()
 
-    # do logic with file in request and fill response
+    # do logic 
+
 
     # Response should use class: 
     #   response_esg.keepAliveRepsonse
-
-
     return jsonify(asdict(responseKeepAlive)), 200
 
 
@@ -86,15 +88,11 @@ def pdfReport(entityName):
         return jsonify(file), 400
     
     myRequestObj = request_esg.PDFReportRequest(file, entityName)
-
-    
-    blobUpload.upload_blob(file)
-
     response = response_esg.PDFReportRepsonse()
-
     response.pdfUrlPath = ""
-
+    
     # do logic with file in request and fill response
+    #TODO
 
     # Response should use class: 
     #   response_esg.pdfReportRepsonse    

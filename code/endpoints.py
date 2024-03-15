@@ -77,7 +77,7 @@ def keepAlive():
 
 
 #   summary: get PDF URL for given entity name
-@app.route('/esg/benchmark/pdf-report/<entityName>', methods=['POST'])
+@app.route('/api/esg/benchmark/pdf-report/<entityName>', methods=['POST'])
 def pdfReport(entityName):
 
     file = upload_file(request, entityName)
@@ -88,7 +88,7 @@ def pdfReport(entityName):
     myRequestObj = request_esg.PDFReportRequest(file, entityName)
 
     
-    blobUpload.upload_blob("", file, "")
+    blobUpload.upload_blob(file)
 
     response = response_esg.PDFReportRepsonse()
 

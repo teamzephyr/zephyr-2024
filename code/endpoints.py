@@ -3,8 +3,11 @@ from main import app
 from markupsafe import escape
 from flask import Flask, jsonify, request, abort
 
+
 import request_esg
 import response_esg
+import mapper
+import blobUpload
 
 # good for testing the endpoint is alive
 @app.route('/')
@@ -27,11 +30,11 @@ def esgEntityName(entityName):
 
     # do logic with file in request and fill response
     
+    responseUpload = mapper.mapUploadRequest(None, entityName)
+
     
     # Response should use class:
     #   response_esg.UploadRequest 
-
-
     return jsonify(asdict(responseUpload)), 200
 
 
@@ -50,9 +53,12 @@ def esgUpload(entityName, esgType, esgIndicator):
 
     # do logic with file in request and fill response
 
+    responseUploadType = mapper.mapUploadRequestType(None, entityName)
+
+
     # Response should use class:  
     #   response_esg.UploadRequestType
-    return jsonify(asdict(responseUploadType)), 200
+    return jsonify(responseUploadType), 200
 
 
 #   summary: Find status of the benchakring service
@@ -80,6 +86,9 @@ def pdfReport(entityName):
         return jsonify(file), 400
     
     myRequestObj = request_esg.PDFReportRequest(file, entityName)
+
+
+    blobUpload.upload_blob("", file, "")
 
     response = response_esg.PDFReportRepsonse()
 

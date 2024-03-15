@@ -30,13 +30,13 @@ class Metrics:
 class ResponseInternalDetails:
     entityName: str = ""
     benchmarkDetails: List[MetaData] = field(default_factory=list)
-    metrics: Metrics = Metrics()
+    metrics: Metrics = Metrics()  
 
 @dataclass
 class ResponseInternalDetailsScalar:
     entityName: str = ""
     benchmarkDetails: MetaData = MetaData()
-    metrics: Metrics = Metrics()
+    metrics: Metrics = Metrics() 
 
 @dataclass
 class pdfReportRepsonse:

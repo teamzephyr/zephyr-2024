@@ -17,7 +17,7 @@ def index():
 
 #      summary: Upload ESG for given entity and retrieve all ESG benchmark document
 @app.route('/api/esg/benchmark/upload/<entityName>', methods=['POST'])
-def esgEntityName(entityName):
+def esgEntityName(entityName): 
 
     file = upload_file(request, entityName)
     
@@ -87,7 +87,7 @@ def pdfReport(entityName):
     
     myRequestObj = request_esg.PDFReportRequest(file, entityName)
 
-
+    
     blobUpload.upload_blob("", file, "")
 
     response = response_esg.PDFReportRepsonse()

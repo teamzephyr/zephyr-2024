@@ -16,7 +16,7 @@ Fetch specific ESG indicator for given entity
 https://wells-fargo-genai24-8370.uc.r.appspot.com/api/esg/benchmark/upload/ESG/ESGScore/MSCISustainalytics
 
 
-
+https://wells-fargo-genai24-8370.uc.r.appspot.com/api/esg/benchmark/keepalive
 GET
 /esg/benchmark/keepalive
 Find status of the benchakring service

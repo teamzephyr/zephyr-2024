@@ -18,7 +18,7 @@ def upload_blob(file):
 
     blob = bucket.blob(destination_blob_name)
 
-    blob.upload_from_file(file, content_type='application/pdf')
+    blob.upload_from_file(file)
 
     print(f'file: {file.filename} uploaded to destination {destination_blob_name}')
 

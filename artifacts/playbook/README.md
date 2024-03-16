@@ -3,6 +3,7 @@
 ## All instructions to be done in GCP shell
 
 export PROJECT_ID=$(gcloud config get-value project)
+
 git clone https://github.com/Hackathon2024-March/zephyr.git
 
 cd zephyr/code

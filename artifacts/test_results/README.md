@@ -15,6 +15,7 @@ POST
 Fetch specific ESG indicator for given entity
 
 https://wells-fargo-genai24-8370.uc.r.appspot.com/api/esg/benchmark/upload/esgdoc/abc/cold
+
 https://wells-fargo-genai24-8370.uc.r.appspot.com/api/esg/benchmark/upload/ESG/ESGScore/MSCISustainalytics
 
 3.Below is service endpoint for an keepalive method -healthcheck
